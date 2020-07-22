@@ -1,0 +1,415 @@
+$eviteCardBgColor: #fff0c2;
+$primaryTextColor: #7a5246;
+$secondaryTextColor: #f26d75;
+$dividerColor: #bdb192;
+$dateDividerColor: #7b7361;
+
+$wedlockFontSize: 80px;
+$relStatusFontSize: 50px;
+$statusFontSize: 80px;
+$h3FontSize: 40px;
+$h5FontSize: 19px;
+$yearFontSize: 37px;
+$monthFontSize: 22px;
+$dateFontSize: 80px;
+$timingFontSize: 19px;
+$timingMeridiemFontSize: 18px;
+$placeFontSize: 20px;
+$addressFontSize: 18px;
+
+$fontFilesPath: '../fonts/';
+$fonts: (
+  'Mathanifo Script': 'Mathanifo_Script.ttf',
+  'Archer Semibold': 'Archer_Semibold.otf',
+  'Archer Bold': 'Archer_Bold.otf',
+  'Archer Book': 'Archer_Book.otf',
+  'Archer Book Italic': 'Archer_Book_Italic.otf',
+  'Archer Light': 'Archer_Light.otf'
+);
+
+@each $fontFamily, $fontFile in $fonts {
+  @font-face {
+    font-family: $fontFamily;
+    src: url(#{$fontFilesPath + $fontFile});
+  }
+}
+
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  height: 100%;
+}
+
+body {
+  background-color: $eviteCardBgColor;
+}
+
+.content-wrapper {
+  width: 90%;
+  margin: 0 auto;
+  text-align: center;
+
+  .intro, .details, .end-note {
+    padding: 20px;
+    box-sizing: border-box;
+    display: flex;
+    flex-flow: row wrap;
+  
+    > * {
+      flex: 1 100%;
+    }
+  }
+}
+
+.wedlock, .rel-status, h3 {
+  font-family: 'Mathanifo Script';
+  color: $primaryTextColor;
+}
+
+h4, p {
+  font-family: 'Archer Semibold';
+  color: $secondaryTextColor;
+}
+
+h5 {
+  font-family: 'Archer Light';
+  color: $secondaryTextColor;
+}
+
+h3 {
+  font-size: $h3FontSize;
+}
+
+h5 {
+  font-size: $h5FontSize;
+}
+
+// Intro
+
+// Wedlock heart animation
+@keyframes love-in-air {
+  0% {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  
+  80% {
+    opacity: 1;
+  }
+  
+  100% {
+    transform: translateY(-10px) scale(1.25);
+    opacity: 0;
+  }
+}
+
+// Blink animation
+@keyframes blink {
+  50% {
+    opacity: 0;
+  }
+}
+
+// Slide in animation
+@keyframes slide-in-from-left {
+  from {
+    transform: translateX(-75px);
+    opacity: 0;
+  }
+}
+
+// Slide in animation
+@keyframes slide-in-from-right {
+  from {
+    transform: translateX(75px);
+    opacity: 0;
+  }
+}
+
+.intro {
+  min-height: 100vh;
+
+  .wedlock {
+    font-size: $wedlockFontSize;
+    line-height: 1;
+    align-self: flex-end;
+    position: relative;
+    
+    > .img-little-hearts {
+      position: absolute;
+      animation: blink 1s linear infinite;
+
+      &.lh-l-1 {
+        left: 10%;
+        top: 55%;
+      }
+
+      &.lh-l-2 {
+        left: 20%;
+        top: 63%;
+        animation-delay: .25s;
+      }
+
+      &.lh-r-1 {
+        right: 20%;
+        top: -10px;
+        animation-delay: .15s;
+      }
+
+      &.lh-r-2 {
+        right: 10%;
+        animation-delay: .35s;
+      }
+    }
+  }
+  
+  .rel-status {
+    font-size: $relStatusFontSize;
+    line-height: 1;
+    margin: 30px 0;
+    
+    .status {
+      font-size: $statusFontSize;
+    }
+  }
+
+  .img-wedlock-container {
+    position: relative;
+    display: inline-block;
+    min-height: 200px;
+    min-width: 155px;
+
+    .img-wedlock-heart, .img-wedlock-bridegroom, .img-wedlock-bride, .img-wedlock-bg {
+      position: absolute;
+    }
+
+    .img-wedlock-heart {
+      top: 0;
+      animation: love-in-air 2s 2.5s infinite;
+      transform-origin: center;
+    }
+
+    .img-wedlock-bridegroom {
+      left: 0;
+      bottom: 10px;
+      animation: slide-in-from-left 2s forwards;
+    }
+
+    .img-wedlock-bride {
+      right: 0;
+      bottom: 7px;
+      animation: slide-in-from-right 2s forwards;
+    }
+
+    .img-wedlock-bg {
+      bottom: 0;
+      left: 5px;
+    }
+  }
+}
+
+// Details
+
+// Join rings animation
+@keyframes join-rings-l {
+	from { transform: translateX(-5px); }
+}
+
+@keyframes join-rings-r {
+	from { transform: translateX(5px); }
+}
+
+// Heart wings animation
+@keyframes fly-heart {
+  0%, 100% {
+    transform: translateY(-10px);
+  }
+
+  50% {
+    transform: translateY(0);
+  }
+}
+
+// Heart beat animation
+@keyframes beat {
+	to { transform: scale(1.4); }
+}
+
+.details {
+  .heading {
+    line-height: 1;
+
+    h5 {
+      margin: 20px 0;
+    }
+  }
+
+  .event, .event-date {
+    margin: 20px 0;
+  }
+
+  .event .event-date {
+    .date {
+      font-family: 'Archer Light';
+      font-size: $dateFontSize;
+      color: $secondaryTextColor;
+      border-right: 1px dotted $dateDividerColor;
+      padding-right: 15px;
+    }
+    
+    .date, .month-year {
+      display: inline-block;
+    }
+    
+    .month-year {
+      text-align: left;
+      padding-left: 15px;
+    
+      .month, .year {
+        font-family: 'Archer Book Italic';
+        color: $primaryTextColor;
+      }
+      
+      .month {
+        font-size: $monthFontSize;
+      }
+      
+      .year {
+        font-size: $yearFontSize;
+      }
+    }
+  }
+  
+  .event .timing {
+    font-size: $timingFontSize;
+
+    .meridiem, .to {
+      font-family: 'Archer Book Italic';
+      font-size: $timingMeridiemFontSize;
+    }
+    
+    .to {
+      color: $primaryTextColor;
+    }
+  }
+
+  .event .event-place {
+    margin-top: 30px;
+
+    .place {
+      margin: 10px 0;
+      font-size: $placeFontSize;
+    }
+    
+    .address p {
+      font-family: 'Archer Book Italic';
+      font-size: $addressFontSize;
+      color: $primaryTextColor;
+    }
+  }
+
+  .img-garland-container, .img-rings-container {
+    position: relative;
+    display: inline-block;
+    margin-top: 20px;
+  }
+
+  .img-garland-container {
+    .img-garland-heart-l, .img-garland-heart-r {
+      position: absolute;
+      top: -18px;
+      animation: beat .25s infinite alternate;
+      transform-origin: center;
+    }
+
+    .img-garland-heart-l {
+      left: -1px;
+    }
+
+    .img-garland-heart-r {
+      right: -4px;
+    }
+  }
+
+  .img-heart-wings {
+    animation: fly-heart 1s infinite alternate;
+    transform-origin: center;
+  }
+
+  .img-two-hearts {
+    animation: beat .25s infinite alternate;
+    transform-origin: center;
+  }
+
+  .img-rings-container {
+    .img-ring-bride, .img-ring-bridegroom {
+      position: absolute;
+      bottom: 10px;
+      transform-origin: center;
+    }
+
+    .img-ring-bride {
+      left: 33px;
+      animation: join-rings-l .5s infinite alternate;
+    }
+
+    .img-ring-bridegroom {
+      right: 33px;
+      animation: join-rings-r .5s infinite alternate;
+    }
+  }
+}
+
+// End note
+.end-note .designer-info > p {
+  margin: 10px 0;
+  font-family: "Archer Light";
+  color: $primaryTextColor;
+}
+
+@media all and (min-width: 991px) {
+  .intro .wedlock {
+    margin-bottom: 50px;
+
+    > * {
+      display: inline-block;
+      margin: 20px 0;
+    }
+    
+    > .img-little-hearts {
+      &.lh-l-1, &.lh-l-2, &.lh-r-1, &.lh-r-2 {
+        left: unset;
+        top: unset;
+        right: unset;
+      }
+
+      &.lh-l-1 {
+        left: 25%;
+        top: -10px;
+      }
+
+      &.lh-r-1 {
+        right: 28%;
+        top: -10px;
+      }
+
+      &.lh-r-2 {
+        right: 26%;
+        top: 10px;
+      }
+    }
+  }
+
+  .details .event {
+    flex: 1 auto;
+    padding: 20px 0;
+
+    + .event {
+      border-left: 1px dotted $dividerColor;
+    }
+  }
+}
